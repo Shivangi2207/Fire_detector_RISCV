@@ -70,6 +70,10 @@ int main() {
 }
 
 ```
+## VERIFICATION OF C CODE:
+
+![Screenshot from 2023-10-04 23-33-17](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/654a33e8-0dd4-4823-969e-b670e030b084)
+
 ## ASSEMBLY CODE:
 
 ```
