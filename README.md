@@ -27,16 +27,18 @@ These sensors include one or more IR receiver diodes. The main purpose of these 
 
 ## C CODE
 ```
-//#include <stdio.h>
+#include <stdio.h>
 //#include <wiringPi.h> // For Raspberry Pi GPIO control
 //#include <unistd.h>
 
 const int buzzerPin = 1; // GPIO pin for the buzzer (adjust for your setup)
 const int flamePin = 2;
 const int ledpin =3;// GPIO pin for the flame sensor (adjust for your setup)
-int Flame = 0; // Assume HIGH (no flame) initially
-int buzzer = 0;
-int led = 0;
+int Flame =0; // Assume HIGH (no flame) initially
+int buzzer =1;
+int led =1 ;
+int buzzer_reg ;
+int led_reg ;
 
 void delay(int milliseconds) {
     for (int i = 0; i < milliseconds; i++) {
@@ -48,7 +50,7 @@ void delay(int milliseconds) {
 
 
 
-int main() {
+void main() {
   //  wiringPiSetupGpio(); // Initialize the wiringPi library
 
 //    pinMode(buzzerPin, OUTPUT);
@@ -60,21 +62,50 @@ int main() {
         
         if (Flame == 0) { // LOW indicates fire detection
           // printf("Fire is Detected\n");
+        //  Flame  = digital_read (0);
            // digitalWrite(buzzerPin, HIGH);
-           buzzer =1 ;
-           led = 1;
-        } else {
+           //digitalWrite(ledpin, HIGH);
+           asm(
+        	"andi %0, x30, 1\n\t"
+        	:"=r"(Flame));
+         // buzzer = digitalwrite(1);
+         // printf("Buzzer is on,fire detected ");
+         buzzer =1;
+          	buzzer_reg = buzzer*2;
+        	asm(
+        	"or x30, x30,%0 \n\t"
+        	:"=r"(buzzer_reg));
+        
+          led = 1;
+          led_reg = led*4;
+          asm(
+        	"or x30, x30,%0 \n\t"
+        	:"=r"(led_reg));
+          
+        } 
+        else {
           // printf("No Fire is Detected\n");
-           // digitalWrite(buzzerPin, LOW);
+         //  buzzer= digitalWrite(0);
            buzzer =0;
-           led = 0;
+           buzzer_reg = buzzer*2;
+        	asm(
+        	"or x30, x30,%0 \n\t"
+        	:"=r"(buzzer_reg));
+        	
+       // led= digitalWrite(0);
+        
+          led = 0;
+          led_reg = led*4;
+          asm(
+        	"or x30, x30,%0 \n\t"
+        	:"=r"(led_reg));
+          
+        } 
         }
         
         delay(1000); // Sleep for 100 milliseconds (adjust as needed)
     }
 
-    return 0;
-}
 
 ```
 
@@ -100,7 +131,8 @@ $ /home/shivangi/riscv32-toolchain/bin/riscv32-unknown-elf-objdump -d shivangi_c
 ```
 
 ```
-shivangi_code.o:     file format elf32-littleriscv
+
+shivi.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
@@ -125,7 +157,7 @@ Disassembly of section .text:
 0000002c <.L3>:
   2c:	fe842703          	lw	a4,-24(s0)
   30:	000027b7          	lui	a5,0x2
-  34:	70f78793          	add	a5,a5,1807 # 270f <.L8+0x265f>
+  34:	70f78793          	add	a5,a5,1807 # 270f <.L7+0x2627>
   38:	fee7d4e3          	bge	a5,a4,20 <.L4>
   3c:	fec42783          	lw	a5,-20(s0)
   40:	00178793          	add	a5,a5,1
@@ -143,34 +175,62 @@ Disassembly of section .text:
 
 00000068 <main>:
   68:	ff010113          	add	sp,sp,-16
-  6c:	00112623          	sw	ra,12(sp)
-  70:	00812423          	sw	s0,8(sp)
-  74:	01010413          	add	s0,sp,16
+  6c:	00812623          	sw	s0,12(sp)
+  70:	01010413          	add	s0,sp,16
 
-00000078 <.L9>:
-  78:	000007b7          	lui	a5,0x0
-  7c:	0007a783          	lw	a5,0(a5) # 0 <delay>
-  80:	02079063          	bnez	a5,a0 <.L7>
+00000074 <.L9>:
+  74:	000007b7          	lui	a5,0x0
+  78:	0007a783          	lw	a5,0(a5) # 0 <delay>
+  7c:	06079663          	bnez	a5,e8 <.L7>
+  80:	001f7713          	and	a4,t5,1
   84:	000007b7          	lui	a5,0x0
-  88:	00100713          	li	a4,1
-  8c:	00e7a023          	sw	a4,0(a5) # 0 <delay>
-  90:	000007b7          	lui	a5,0x0
-  94:	00100713          	li	a4,1
-  98:	00e7a023          	sw	a4,0(a5) # 0 <delay>
-  9c:	0140006f          	j	b0 <.L8>
+  88:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+  8c:	000007b7          	lui	a5,0x0
+  90:	00100713          	li	a4,1
+  94:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+  98:	000007b7          	lui	a5,0x0
+  9c:	0007a783          	lw	a5,0(a5) # 0 <delay>
+  a0:	00179713          	sll	a4,a5,0x1
+  a4:	000007b7          	lui	a5,0x0
+  a8:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+  ac:	00ef6f33          	or	t5,t5,a4
+  b0:	000007b7          	lui	a5,0x0
+  b4:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+  b8:	000007b7          	lui	a5,0x0
+  bc:	00100713          	li	a4,1
+  c0:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+  c4:	000007b7          	lui	a5,0x0
+  c8:	0007a783          	lw	a5,0(a5) # 0 <delay>
+  cc:	00279713          	sll	a4,a5,0x2
+  d0:	000007b7          	lui	a5,0x0
+  d4:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+  d8:	00ef6f33          	or	t5,t5,a4
+  dc:	000007b7          	lui	a5,0x0
+  e0:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+  e4:	f91ff06f          	j	74 <.L9>
 
-000000a0 <.L7>:
-  a0:	000007b7          	lui	a5,0x0
-  a4:	0007a023          	sw	zero,0(a5) # 0 <delay>
-  a8:	000007b7          	lui	a5,0x0
-  ac:	0007a023          	sw	zero,0(a5) # 0 <delay>
-
-000000b0 <.L8>:
-  b0:	3e800513          	li	a0,1000
-  b4:	00000097          	auipc	ra,0x0
-  b8:	000080e7          	jalr	ra # b4 <.L8+0x4>
-  bc:	fbdff06f          	j	78 <.L9>
-
+000000e8 <.L7>:
+  e8:	000007b7          	lui	a5,0x0
+  ec:	0007a023          	sw	zero,0(a5) # 0 <delay>
+  f0:	000007b7          	lui	a5,0x0
+  f4:	0007a783          	lw	a5,0(a5) # 0 <delay>
+  f8:	00179713          	sll	a4,a5,0x1
+  fc:	000007b7          	lui	a5,0x0
+ 100:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+ 104:	00ef6f33          	or	t5,t5,a4
+ 108:	000007b7          	lui	a5,0x0
+ 10c:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+ 110:	000007b7          	lui	a5,0x0
+ 114:	0007a023          	sw	zero,0(a5) # 0 <delay>
+ 118:	000007b7          	lui	a5,0x0
+ 11c:	0007a783          	lw	a5,0(a5) # 0 <delay>
+ 120:	00279713          	sll	a4,a5,0x2
+ 124:	000007b7          	lui	a5,0x0
+ 128:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+ 12c:	00ef6f33          	or	t5,t5,a4
+ 130:	000007b7          	lui	a5,0x0
+ 134:	00e7a023          	sw	a4,0(a5) # 0 <delay>
+ 138:	f3dff06f          	j	74 <.L9>
 
 ```
 
@@ -178,24 +238,28 @@ Disassembly of section .text:
 ## LISTS OF INSTRUCTIONS THIS CODE CONTAINS:
 To count no of different instruction run python.py code on terminal we will get our list of intructions.
 
-![Screenshot from 2023-10-05 11-08-58](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/24d1a2cb-60f1-44ed-907b-9dadbb044f2c)
+![Screenshot from 2023-10-05 22-58-18](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/9b4122a7-74f2-4f09-ab10-70240d21c78f)
+
+
 
 ```
-Number of different instructions: 13
+Number of different instructions: 14
 List of unique instructions:
-jalr
-sw
-auipc
-nop
 j
 bge
-bnez
+nop
 lui
 ret
-blt
-add
 li
+add
+blt
+sll
+or
+bnez
+and
 lw
+sw
+
 
 
 
@@ -206,8 +270,7 @@ lw
 
 - Kunal Ghosh, VSD Corp. Pvt. Ltd.
 - Mayank Kabra
-- Nancy Gupta, IIITB
-- Bhargav, Colleague, IIITB
+  
 
 
 ## REFERENCES
