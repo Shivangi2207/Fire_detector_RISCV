@@ -14,6 +14,11 @@ These sensors include one or more IR receiver diodes. The main purpose of these 
 
 ![Screenshot from 2023-10-05 00-07-02](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/9ffa7071-1f2f-45cc-b249-f415baba64f3)
 
+
+## BLOCK DIAGRAM
+
+
+
 ## CIRCUIT DIAGRAM
 
 ![Screenshot from 2023-10-04 23-37-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/aada2bbe-fe30-4125-99a3-76b8dcacef66)
@@ -153,6 +158,7 @@ Disassembly of section .text:
 
 
 ## LISTS OF INSTRUCTIONS THIS CODE CONTAINS:
+To count no of different instruction run python.py code on terminal we will get our list of intructions.
 
 ![Screenshot from 2023-10-05 11-08-58](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/24d1a2cb-60f1-44ed-907b-9dadbb044f2c)
 
@@ -176,3 +182,18 @@ lw
 
 
 ```
+
+
+## ACKNOWLEDMENT
+
+- Kunal Ghosh, VSD Corp. Pvt. Ltd.
+- Mayank Kabra
+- Nancy Gupta, IIITB
+- Bhargav, Colleague, IIITB
+
+
+## REFERENCES
+
+- https://github.com/SakethGajawada/RISCV-GNU
+- https://www.electronicshub.org/arduino-flame-sensor-interface/
+- https://www.moryarduino.com/arduino-project/fire-alarm-using-flame-sensor-arduino
