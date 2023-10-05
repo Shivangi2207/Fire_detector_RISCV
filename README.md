@@ -9,7 +9,8 @@ Fire alarms are essential safety devices that serve a crucial role in detecting 
 - Buzzer
 - LED
 
-## How do fire sensors work?
+## HOW DO FLAME SENSORS WORK?
+A flame-sensor is one kind of detector which is mainly designed for detecting as well as responding to the occurrence of a fire or flame. The flame detection response can depend on its fitting. It includes an alarm system, a natural gas line, propane & a fire suppression system. This sensor is used in industrial boilers. The main function of this is to give authentication whether the boiler is properly working or not. The response of these sensors is faster as well as more accurate compare with a heat/smoke detector because of its mechanism while detecting the flame.
 These sensors include one or more IR receiver diodes. The main purpose of these sensors is to detect IR rays. That is, when there is a fire near this sensor, it can detect the IR rays in the fire (these IR rays are invisible to our eye). Then, it gives us a signal through these sensors. That is, we can get that signal as a digital or analog value.
 
 ![Screenshot from 2023-10-05 00-07-02](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/9ffa7071-1f2f-45cc-b249-f415baba64f3)
@@ -76,11 +77,27 @@ int main() {
 }
 
 ```
+
+
 ## VERIFICATION OF C CODE:
 
 ![Screenshot from 2023-10-04 23-33-17](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/654a33e8-0dd4-4823-969e-b670e030b084)
+```
+gcc shivangi_code.c
+./a.out
+
+```
+
 
 ## ASSEMBLY CODE:
+
+Steps to get assembly code
+
+```
+$ /home/shivangi/riscv32-toolchain/bin/riscv32-unknown-elf-gcc -c -mabi=ilp32 -march=rv32im -ffreestanding -o shivangi_code.o shivangi_code.c
+$ /home/shivangi/riscv32-toolchain/bin/riscv32-unknown-elf-objdump -d shivangi_code.o > fire_alarm_assembly1.txt
+
+```
 
 ```
 shivangi_code.o:     file format elf32-littleriscv
