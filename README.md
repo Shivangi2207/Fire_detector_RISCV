@@ -63,8 +63,6 @@ void main() {
         if (Flame == 0) { // LOW indicates fire detection
           // printf("Fire is Detected\n");
         //  Flame  = digital_read (0);
-           // digitalWrite(buzzerPin, HIGH);
-           //digitalWrite(ledpin, HIGH);
            asm(
         	"andi %0, x30, 1\n\t"
         	:"=r"(Flame));
