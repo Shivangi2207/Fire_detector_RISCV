@@ -25,6 +25,15 @@ These sensors include one or more IR receiver diodes. The main purpose of these 
 
 ![Screenshot from 2023-10-04 23-37-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/aada2bbe-fe30-4125-99a3-76b8dcacef66)
 
+
+## GPIO
+x30[0] is an input pin to detect flame from flame sensor.
+
+x30[1] is an output pin used to indicate about the  flame detection using buzzer.
+
+x30[2] is an output pin used to indicate about the flame detection using led.
+
+
 ## C CODE
 ```
 //#include <stdio.h>
