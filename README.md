@@ -130,87 +130,59 @@ gcc shivangi_code.c
 Steps to get assembly code
 
 ```
-/home/shivangi/riscv32-toolchain/bin/riscv32-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out shivangi_code.c
-/home/shivangi/riscv32-toolchain/bin/riscv32-unknown-elf-objdump -d -r out > fire_alarm_assembly.txt
-
+/home/shivangi/riscv32-toolchain/bin/riscv64-unkown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out shivangi_code.c
+/home/shivangi/riscv32-toolchain/bin/riscv64-unknown-elf-objdump -d  -r out > fire_alarm_assembly.txt
 ```
 
 ```
+
 
 out:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
 
-00010074 <main>:
-   10074:	ff010113          	add	sp,sp,-16
-   10078:	00112623          	sw	ra,12(sp)
-   1007c:	00812423          	sw	s0,8(sp)
-   10080:	01010413          	add	s0,sp,16
-   10084:	0c8000ef          	jal	1014c <Flame_detected>
-   10088:	ffdff06f          	j	10084 <main+0x10>
+00010054 <main>:
+   10054:	fd010113          	addi	sp,sp,-48
+   10058:	02812623          	sw	s0,44(sp)
+   1005c:	03010413          	addi	s0,sp,48
+   10060:	fe042623          	sw	zero,-20(s0)
+   10064:	fec42783          	lw	a5,-20(s0)
+   10068:	00179793          	slli	a5,a5,0x1
+   1006c:	fef42223          	sw	a5,-28(s0)
+   10070:	fe042423          	sw	zero,-24(s0)
+   10074:	fe842783          	lw	a5,-24(s0)
+   10078:	00279793          	slli	a5,a5,0x2
+   1007c:	fef42023          	sw	a5,-32(s0)
+   10080:	fe442783          	lw	a5,-28(s0)
+   10084:	fe042703          	lw	a4,-32(s0)
+   10088:	00ff6f33          	or	t5,t5,a5
+   1008c:	00ef6f33          	or	t5,t5,a4
+   10090:	001f7793          	andi	a5,t5,1
+   10094:	fcf42e23          	sw	a5,-36(s0)
+   10098:	fdc42703          	lw	a4,-36(s0)
+   1009c:	00100793          	li	a5,1
+   100a0:	00f71c63          	bne	a4,a5,100b8 <main+0x64>
+   100a4:	00100793          	li	a5,1
+   100a8:	fef42623          	sw	a5,-20(s0)
+   100ac:	00100793          	li	a5,1
+   100b0:	fef42423          	sw	a5,-24(s0)
+   100b4:	00c0006f          	j	100c0 <main+0x6c>
+   100b8:	fe042623          	sw	zero,-20(s0)
+   100bc:	fe042423          	sw	zero,-24(s0)
+   100c0:	fec42783          	lw	a5,-20(s0)
+   100c4:	00179793          	slli	a5,a5,0x1
+   100c8:	fef42223          	sw	a5,-28(s0)
+   100cc:	fe842783          	lw	a5,-24(s0)
+   100d0:	00279793          	slli	a5,a5,0x2
+   100d4:	fef42023          	sw	a5,-32(s0)
+   100d8:	fe442783          	lw	a5,-28(s0)
+   100dc:	fe042703          	lw	a4,-32(s0)
+   100e0:	00ff6f33          	or	t5,t5,a5
+   100e4:	00ef6f33          	or	t5,t5,a4
+   100e8:	fa9ff06f          	j	10090 <main+0x3c>
 
-0001008c <Flame_monitor>:
-   1008c:	fd010113          	add	sp,sp,-48
-   10090:	02812623          	sw	s0,44(sp)
-   10094:	03010413          	add	s0,sp,48
-   10098:	fe042623          	sw	zero,-20(s0)
-   1009c:	fec42783          	lw	a5,-20(s0)
-   100a0:	00179793          	sll	a5,a5,0x1
-   100a4:	fef42423          	sw	a5,-24(s0)
-   100a8:	fe042223          	sw	zero,-28(s0)
-   100ac:	fe442783          	lw	a5,-28(s0)
-   100b0:	00279793          	sll	a5,a5,0x2
-   100b4:	fef42023          	sw	a5,-32(s0)
-   100b8:	001f7793          	and	a5,t5,1
-   100bc:	fcf42e23          	sw	a5,-36(s0)
-   100c0:	fe842783          	lw	a5,-24(s0)
-   100c4:	00ff6f33          	or	t5,t5,a5
-   100c8:	fe042783          	lw	a5,-32(s0)
-   100cc:	00ff6f33          	or	t5,t5,a5
-   100d0:	fdc42703          	lw	a4,-36(s0)
-   100d4:	00100793          	li	a5,1
-   100d8:	04f71063          	bne	a4,a5,10118 <Flame_monitor+0x8c>
-   100dc:	00100793          	li	a5,1
-   100e0:	fef42623          	sw	a5,-20(s0)
-   100e4:	fec42783          	lw	a5,-20(s0)
-   100e8:	00179793          	sll	a5,a5,0x1
-   100ec:	fef42423          	sw	a5,-24(s0)
-   100f0:	00100793          	li	a5,1
-   100f4:	fef42223          	sw	a5,-28(s0)
-   100f8:	fe442783          	lw	a5,-28(s0)
-   100fc:	00279793          	sll	a5,a5,0x2
-   10100:	fef42023          	sw	a5,-32(s0)
-   10104:	fe842783          	lw	a5,-24(s0)
-   10108:	00ff6f33          	or	t5,t5,a5
-   1010c:	fe042783          	lw	a5,-32(s0)
-   10110:	00ff6f33          	or	t5,t5,a5
-   10114:	fbdff06f          	j	100d0 <Flame_monitor+0x44>
-   10118:	fe042623          	sw	zero,-20(s0)
-   1011c:	fec42783          	lw	a5,-20(s0)
-   10120:	00179793          	sll	a5,a5,0x1
-   10124:	fef42423          	sw	a5,-24(s0)
-   10128:	fe042223          	sw	zero,-28(s0)
-   1012c:	fe442783          	lw	a5,-28(s0)
-   10130:	00279793          	sll	a5,a5,0x2
-   10134:	fef42023          	sw	a5,-32(s0)
-   10138:	fe842783          	lw	a5,-24(s0)
-   1013c:	00ff6f33          	or	t5,t5,a5
-   10140:	fe042783          	lw	a5,-32(s0)
-   10144:	00ff6f33          	or	t5,t5,a5
-   10148:	f89ff06f          	j	100d0 <Flame_monitor+0x44>
 
-0001014c <Flame_detected>:
-   1014c:	ff010113          	add	sp,sp,-16
-   10150:	00112623          	sw	ra,12(sp)
-   10154:	00812423          	sw	s0,8(sp)
-   10158:	01010413          	add	s0,sp,16
-   1015c:	f31ff0ef          	jal	1008c <Flame_monitor>
-   10160:	00000013          	nop
-   10164:	00c12083          	lw	ra,12(sp)
-   10168:	00812403          	lw	s0,8(sp)
-   1016c:	01010113          	add	sp,sp,16
-   10170:	00008067          	ret
 ```
 
 
