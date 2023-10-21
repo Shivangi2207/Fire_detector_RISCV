@@ -190,24 +190,20 @@ Disassembly of section .text:
 To count no of different instruction run python.py code on terminal we will get our list of intructions.
 
 
-![Screenshot from 2023-10-09 19-39-09](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/136794a4-4c6f-4592-8d1e-c919e58d2ceb)
-
+![Screenshot from 2023-10-21 21-32-49](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/ad9920bf-7c4e-459c-936b-d76bc0287e0d)
 
 ```
-Number of different instructions: 12
+Number of different instructions: 9
 List of unique instructions:
-jal
-or
-j
-sll
-li
-add
+slli
 sw
-and
 lw
-ret
+addi
+or
+andi
+li
 bne
-nop
+j
 
 
 
