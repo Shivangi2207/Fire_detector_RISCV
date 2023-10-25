@@ -27,11 +27,13 @@ These sensors include one or more IR receiver diodes. The main purpose of these 
 
 
 ## GPIO
-x30[0] is an input pin to detect flame from flame sensor.
+x30[0] is an input pin to reset the device if it is 1 only then our device will work.
 
-x30[1] is an output pin used to indicate about the  flame detection using buzzer.
+x30[1] is an input pin to detect flame from flame sensor.
 
-x30[2] is an output pin used to indicate about the flame detection using led.
+x30[2] is an output pin used to indicate about the  flame detection using buzzer.
+
+x30[3] is an output pin used to indicate about the flame detection using led.
 
 
 ## C CODE
