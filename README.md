@@ -114,12 +114,12 @@ int main() {
 	
 	 
 
-         flag = 1;
+         //flag = 1;
       if (flag) {
 
               //flame = digital_read(0);
 
-              printf("entered in for loop\n");
+              printf("entered if case \n");
 
              
 
@@ -143,8 +143,8 @@ int main() {
 */
  
 
-              flame=1;
-	        if(flame){
+              //flame=0;
+	        if(flame==0){
              
               // buzzer = digitalwrite(1);
               // led = digitalwrite(1);
@@ -222,6 +222,10 @@ int main() {
 
 }
   
+
+  
+
+          
 
   
 
@@ -351,11 +355,11 @@ riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o out fire_alarm
 spike pk out
 ```
 ## RESULTS:
-When  flag input and sensor both are set to 1 then both led and buzzer should turn on. After performing the masking operation the t5 value is set to 12 (i.e 1100 in binary) as inpi\uts are being masked .
+When  flag input and sensor both are set to 1 and 0 respectively then both led and buzzer should turn on. After performing the masking operation the t5 value is set to 12 (i.e 1100 in binary) as inpi\uts are being masked .
 t1 case is when both input and outputs are reset to 0 ,
 t2 case is when it entered whie (1) ,
 t3 case is when it entered the if case because we set flag to 1 ,
-t4 case is obtained when else case is satisfied, in this case we set flame to 1 so we are not entering into it so we are getting 0 ,
+t4 case is obtained when else case is satisfied, in this case we set flame to 0 so we are not entering into it so we are getting 0 ,
 t5 case we are getting 12 that means 1100 which tells that are  funtionality is correct as we should get led and buzzer set to 1 and this is what we are getting  ,
 
 hence funtionality is verified
@@ -376,7 +380,25 @@ flag = 1, flame =0, so we are getting proper output by getting 0 values of led a
 flag=1, flame =1, so we are getting proper out by getting 1 values of led and buzzer and here we are getting t5 value to be 12 that is both led and buzzer is on .
 
 
+## Functional Simulation:
 
+After spike simulation I have done functionality simulation using GTKWave and matched the output for different combination of inputs with the desired outputs.
+For INPUTS flag = 1 and flame =0 (i.e 01) OUTPUTS should be 11 that means flame sensor detected fire and led and buzzer turn on (i.e 11).
+![Screenshot from 2023-10-27 16-08-19](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/abb8d864-0987-45b3-9ce5-e856501474f1)
+
+
+For INPUT 10 OUTPUT should be 00
+![Screenshot from 2023-10-27 16-07-14](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/27480a52-5a62-44a2-86f3-7e5c7974f4f1)
+
+
+For INPUT 00 OUTPUT should be 00
+
+![Screenshot from 2023-10-27 16-09-23](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/171cb0fb-4d48-4793-b6a4-136ad4ca88de)
+
+
+For INPUT 11 OUTPUTS should be 00
+
+![Screenshot from 2023-10-27 16-10-43](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/47bf5e42-c939-499b-8437-c88828b4b4cc)
 
 
 
