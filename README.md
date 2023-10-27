@@ -253,8 +253,6 @@ Steps to get assembly code
 
 ```
 
-
-
 out:     file format elf32-littleriscv
 
 
@@ -282,36 +280,35 @@ Disassembly of section .text:
    1009c:	00ef6f33          	or	t5,t5,a4
    100a0:	001f7793          	andi	a5,t5,1
    100a4:	fcf42c23          	sw	a5,-40(s0)
-   100a8:	00100793          	li	a5,1
-   100ac:	fcf42c23          	sw	a5,-40(s0)
-   100b0:	fd842783          	lw	a5,-40(s0)
-   100b4:	fe0786e3          	beqz	a5,100a0 <main+0x4c>
-   100b8:	002f7793          	andi	a5,t5,2
-   100bc:	fcf42a23          	sw	a5,-44(s0)
+   100a8:	fd842783          	lw	a5,-40(s0)
+   100ac:	fe078ae3          	beqz	a5,100a0 <main+0x4c>
+   100b0:	002f7793          	andi	a5,t5,2
+   100b4:	fcf42a23          	sw	a5,-44(s0)
+   100b8:	fd442783          	lw	a5,-44(s0)
+   100bc:	00079c63          	bnez	a5,100d4 <main+0x80>
    100c0:	00100793          	li	a5,1
-   100c4:	fcf42a23          	sw	a5,-44(s0)
-   100c8:	fd442783          	lw	a5,-44(s0)
-   100cc:	00078c63          	beqz	a5,100e4 <main+0x90>
-   100d0:	00100793          	li	a5,1
-   100d4:	fef42623          	sw	a5,-20(s0)
-   100d8:	00100793          	li	a5,1
-   100dc:	fef42423          	sw	a5,-24(s0)
-   100e0:	00c0006f          	j	100ec <main+0x98>
-   100e4:	fe042623          	sw	zero,-20(s0)
-   100e8:	fe042423          	sw	zero,-24(s0)
-   100ec:	fec42783          	lw	a5,-20(s0)
-   100f0:	00279793          	slli	a5,a5,0x2
-   100f4:	fef42223          	sw	a5,-28(s0)
-   100f8:	fe842783          	lw	a5,-24(s0)
-   100fc:	00379793          	slli	a5,a5,0x3
-   10100:	fef42023          	sw	a5,-32(s0)
-   10104:	fe442783          	lw	a5,-28(s0)
-   10108:	fe042703          	lw	a4,-32(s0)
-   1010c:	fdc42683          	lw	a3,-36(s0)
-   10110:	00df7f33          	and	t5,t5,a3
-   10114:	00ff6f33          	or	t5,t5,a5
-   10118:	00ef6f33          	or	t5,t5,a4
-   1011c:	f85ff06f          	j	100a0 <main+0x4c>
+   100c4:	fef42623          	sw	a5,-20(s0)
+   100c8:	00100793          	li	a5,1
+   100cc:	fef42423          	sw	a5,-24(s0)
+   100d0:	00c0006f          	j	100dc <main+0x88>
+   100d4:	fe042623          	sw	zero,-20(s0)
+   100d8:	fe042423          	sw	zero,-24(s0)
+   100dc:	fec42783          	lw	a5,-20(s0)
+   100e0:	00279793          	slli	a5,a5,0x2
+   100e4:	fef42223          	sw	a5,-28(s0)
+   100e8:	fe842783          	lw	a5,-24(s0)
+   100ec:	00379793          	slli	a5,a5,0x3
+   100f0:	fef42023          	sw	a5,-32(s0)
+   100f4:	fe442783          	lw	a5,-28(s0)
+   100f8:	fe042703          	lw	a4,-32(s0)
+   100fc:	fdc42683          	lw	a3,-36(s0)
+   10100:	00df7f33          	and	t5,t5,a3
+   10104:	00ff6f33          	or	t5,t5,a5
+   10108:	00ef6f33          	or	t5,t5,a4
+   1010c:	f95ff06f          	j	100a0 <main+0x4c>
+
+
+
 
 
 ```
@@ -320,22 +317,24 @@ Disassembly of section .text:
 ## LISTS OF INSTRUCTIONS THIS CODE CONTAINS:
 To count no of different instruction run python.py code on terminal we will get our list of intructions.
 
-![Screenshot from 2023-10-25 16-47-42](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/d534f327-5cb6-4d33-9433-9392537ec1d2)
+![Screenshot from 2023-10-27 15-56-02](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/3f555b59-8e73-484a-b044-7ee6814d726d)
 
 
 ```
-Number of different instructions: 10
+Number of different instructions: 11
 List of unique instructions:
 addi
+slli
 sw
 beqz
-lw
-andi
-j
 or
-slli
-and
 li
+j
+lw
+bnez
+andi
+and
+
 
 
 
