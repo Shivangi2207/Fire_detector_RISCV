@@ -17,8 +17,8 @@ These sensors include one or more IR receiver diodes. The main purpose of these 
 
 
 ## BLOCK DIAGRAM
+![WhatsApp Image 2023-10-27 at 16 36 17](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/b77212e5-7cf1-452d-9be1-f128d13f84cf)
 
-![flowchart](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/07df280f-808f-44c6-b70b-7d8d1711f84a)
 
 
 ## CIRCUIT DIAGRAM
