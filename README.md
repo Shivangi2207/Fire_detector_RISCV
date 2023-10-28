@@ -384,21 +384,22 @@ flag=1, flame =1, so we are getting proper out by getting 1 values of led and bu
 
 After spike simulation I have done functionality simulation using GTKWave and matched the output for different combination of inputs with the desired outputs.
 For INPUTS flag = 1 and flame =0 (i.e 01) OUTPUTS should be 11 that means flame sensor detected fire and led and buzzer turn on (i.e 11).
-![Screenshot from 2023-10-27 16-08-19](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/abb8d864-0987-45b3-9ce5-e856501474f1)
+
+![Screenshot from 2023-10-28 10-46-22](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/b5b374fa-28ed-46f8-aac6-352daa21e4ef)
 
 
 For INPUT 10 OUTPUT should be 00
-![Screenshot from 2023-10-27 16-07-14](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/27480a52-5a62-44a2-86f3-7e5c7974f4f1)
 
+![Screenshot from 2023-10-28 10-52-51](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/1ef36ee7-76c2-4e0e-990f-0618ddd0af30)
 
 For INPUT 00 OUTPUT should be 00
+![Screenshot from 2023-10-28 10-51-02](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/1f64f1e6-c865-406b-b4f0-0b9d63d3a0e6)
 
-![Screenshot from 2023-10-27 16-09-23](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/171cb0fb-4d48-4793-b6a4-136ad4ca88de)
 
 
 For INPUT 11 OUTPUTS should be 00
 
-![Screenshot from 2023-10-27 16-10-43](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/47bf5e42-c939-499b-8437-c88828b4b4cc)
+![Screenshot from 2023-10-28 10-41-52](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/62707ce8-bad9-485e-ad2f-933b3d822929)
 
 
 
