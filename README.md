@@ -377,7 +377,8 @@ flag =0 , so it is not entering into the loop
 
 flag = 1, flame =1, so we are getting proper output by getting 0 values of led and buzzer. So here we are getting t4 value as it is etering in else loop as flame is set to 0.
 
-![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/e4ae24cf-e624-4a70-8bbe-ee7f09e644c7)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/b1d6e349-9988-4f9d-a77d-6e3440c95eb5)
+
 
 
 flag=1, flame =0, so we are getting proper out by getting 1 values of led and buzzer and here we are getting t5 value to be 12 that is both led and buzzer is on .
