@@ -367,15 +367,18 @@ hence funtionality is verified
 
 
 
-![image(1)](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/2e2770e7-8518-4bb1-a9ac-1cf8914888a2)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/d5171f16-867f-4309-b51a-afa87fc4fdf8)
+
 
 flag =0 , so it is not entering into the loop
 
-![image(2)](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/cb963d78-78ab-4779-9fe6-d2494998a003)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/742098c0-fffe-4ef8-b38d-b3a00439f1d3)
+
 
 flag = 1, flame =1, so we are getting proper output by getting 0 values of led and buzzer. So here we are getting t4 value as it is etering in else loop as flame is set to 0.
 
-![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/b6332f0e-9fe3-4edd-86e8-715c141d5319)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/e4ae24cf-e624-4a70-8bbe-ee7f09e644c7)
+
 
 flag=1, flame =0, so we are getting proper out by getting 1 values of led and buzzer and here we are getting t5 value to be 12 that is both led and buzzer is on .
 
