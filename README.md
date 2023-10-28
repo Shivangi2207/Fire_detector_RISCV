@@ -355,11 +355,11 @@ riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o out fire_alarm
 spike pk out
 ```
 ## RESULTS:
-When  flag input and sensor both are set to 1 and 0 respectively then both led and buzzer should turn on. After performing the masking operation the t5 value is set to 12 (i.e 1100 in binary) as inpi\uts are being masked .
+When  flag input and sensor both are set to 1 and 0 respectively then both led and buzzer should turn on. After performing the masking operation the t5 value is set to 12 (i.e 1100 in binary) as inputs are being masked .
 t1 case is when both input and outputs are reset to 0 ,
 t2 case is when it entered whie (1) ,
 t3 case is when it entered the if case because we set flag to 1 ,
-t4 case is obtained when else case is satisfied, in this case we set flame to 0 so we are not entering into it so we are getting 0 ,
+t4 case is obtained when else case is satisfied, in this case we set flame to 1 so we are not entering into it so we are getting 0 ,
 t5 case we are getting 12 that means 1100 which tells that are  funtionality is correct as we should get led and buzzer set to 1 and this is what we are getting  ,
 
 hence funtionality is verified
@@ -373,11 +373,11 @@ flag =0 , so it is not entering into the loop
 
 ![image(2)](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/cb963d78-78ab-4779-9fe6-d2494998a003)
 
-flag = 1, flame =0, so we are getting proper output by getting 0 values of led and buzzer. So here we are getting t4 value as it is etering in else loop as flame is set to 0.
+flag = 1, flame =1, so we are getting proper output by getting 0 values of led and buzzer. So here we are getting t4 value as it is etering in else loop as flame is set to 0.
 
 ![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/b6332f0e-9fe3-4edd-86e8-715c141d5319)
 
-flag=1, flame =1, so we are getting proper out by getting 1 values of led and buzzer and here we are getting t5 value to be 12 that is both led and buzzer is on .
+flag=1, flame =0, so we are getting proper out by getting 1 values of led and buzzer and here we are getting t5 value to be 12 that is both led and buzzer is on .
 
 
 ## Functional Simulation:
