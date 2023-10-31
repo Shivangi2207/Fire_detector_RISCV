@@ -406,6 +406,63 @@ For INPUT 11 OUTPUTS should be 00
 ![Screenshot from 2023-10-28 10-41-52](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/62707ce8-bad9-485e-ad2f-933b3d822929)
 
 
+## Gate Level Simulation (GLS)
+
+In GLS i have used "sky130_fd_sc_hd__tt_025C_1v80_256.lib" library which is been integrated with sram cell. To generate the netlist following commands are used.
+
+```
+$ yosys
+yosys> read_liberty -lib lib/sky130_fd_sc_hd__tt_025C_1v80_256.lib
+yosys> read_verilog processor.v
+yosys> synth -top wrapper
+yosys> dfflibmap -liberty lib/sky130_fd_sc_hd__tt_025C_1v80_256.lib
+yosys> abc -liberty lib/sky130_fd_sc_hd__tt_025C_1v80_256.lib
+yosys> write_verilog synth_asic.v
+
+
+```
+
+![Screenshot from 2023-10-31 12-46-26](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/0c7829a2-285b-4eb3-a97b-1ada4afa27fc)
+
+In the above figure we can see that 2 SRAM Cells is mapped into the netlist. to validate the UART functionality in this netlist, we ensure that in the "processor.v" file, the variable "writing_inst_done" is set to 1 to exclude the UART module during simulation, followed by the following steps:
+```
+$ yosys
+yosys> read_liberty -lib lib/sky130_fd_sc_hd__tt_025C_1v80_256.lib
+yosys> read_verilog processor.v
+yosys> synth -top wrapper
+yosys> dfflibmap -liberty lib/sky130_fd_sc_hd__tt_025C_1v80_256.lib
+yosys> abc -liberty lib/sky130_fd_sc_hd__tt_025C_1v80_256.lib
+yosys> write_verilog synth_test.v
+
+```
+This will create the functionality for uart.
+
+Now to verify the functionality of GLS we will run following command.
+
+```
+iverilog -o test testbench.v synth_test.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
+./test
+gtkwave waveform.vcd &
+
+```
+
+## CASE 1: when INPUTS are 01 then output will be 11
+
+![Screenshot from 2023-10-31 18-05-09](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/4f615f71-01c4-46e5-8d02-f951185b6550)
+
+## CASE 2: when INPUTS are 11 the output will be 00
+
+![Screenshot from 2023-10-31 18-09-32](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/5da8bf8e-d8fd-4e12-8ab0-07aa1c7268b5)
+
+## CASE 3: when INPUTS are 10 the output will be 00
+
+![Screenshot from 2023-10-31 18-12-53](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/b3d285f3-661f-4487-a056-c4a10bfb2e42)
+
+## CASE 3: when INPUTS are 00 the output will be 00
+
+
+![Screenshot from 2023-10-31 18-15-07](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/da045c49-9c52-4ddb-97a3-c95c391f8897)
+
 
 ## ACKNOWLEDMENT
 
