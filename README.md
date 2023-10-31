@@ -406,6 +406,19 @@ For INPUT 11 OUTPUTS should be 00
 ![Screenshot from 2023-10-28 10-41-52](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/62707ce8-bad9-485e-ad2f-933b3d822929)
 
 
+## Verification of instruction:
+
+The very first instruction of my assembly code is addi	sp,sp,-48 .The assembly language instruction "addi sp, sp, -48" in the RISC-V architecture subtracts 48 from the stack pointer (sp), effectively reserving 48 bytes of space on the stack for local variables or other data within a function. This is a common operation at the beginning of a function to set up a stack frame, and it's typically followed by a corresponding "addi sp, sp, 48" instruction at the end of the function to release the allocated space when the function call is finished.
+
+![Screenshot from 2023-10-31 18-37-14](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/4c48ff75-e32f-45bf-8cd3-71545549f8f8)
+
+Next we have slli a5,a5,0x2
+
+
+![Screenshot from 2023-10-31 18-41-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/76d3f0b2-ec97-45b7-a783-1740278f9fed)
+
+
+
 ## Gate Level Simulation (GLS)
 
 In GLS i have used "sky130_fd_sc_hd__tt_025C_1v80_256.lib" library which is been integrated with sram cell. To generate the netlist following commands are used.
