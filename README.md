@@ -417,6 +417,18 @@ Next we have slli a5,a5,0x2
 
 ![Screenshot from 2023-10-31 18-41-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/76d3f0b2-ec97-45b7-a783-1740278f9fed)
 
+Next we have "002f7793" andi a5,t5,2
+
+![Screenshot from 2023-11-02 22-49-05](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/a9437e22-3403-48a2-8ec5-04847e0916a8)
+
+
+At every "f95ff06f" instruction output is updated to 11 i.e J operation
+
+![Screenshot from 2023-11-02 22-41-23](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/8bebb3a5-8304-4001-ae55-6b2b707dea3d)
+
+At every   "00ff6f33"   instruction output is resetting to 00  i.e   or t5,t5,a5 instruction is being performed
+
+![Screenshot from 2023-11-02 22-50-42](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/6443894d-a69f-4cad-8150-8d1f5c7a97b4)
 
 
 ## Gate Level Simulation (GLS)
