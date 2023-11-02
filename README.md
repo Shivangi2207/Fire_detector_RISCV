@@ -492,7 +492,7 @@ gtkwave waveform.vcd &
 ## ACKNOWLEDMENT
 
 - Kunal Ghosh, VSD Corp. Pvt. Ltd.
-- Mayank Kabra
+- Mayank Kabra (Founder, Chipcron Pvt. Ltd.)
   
 
 
