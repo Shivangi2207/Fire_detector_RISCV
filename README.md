@@ -488,8 +488,58 @@ gtkwave waveform.vcd &
 
 ![Screenshot from 2023-10-31 18-15-07](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/da045c49-9c52-4ddb-97a3-c95c391f8897)
 
+# PHYSICAL DESIGN:
 
 
+![Screenshot from 2023-11-14 23-00-18](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/0edc9767-612f-45e3-a550-65ed7997ffe7)
+
+
+ - Synthesis:
+        Generate gate-level netlist using Yosys.
+        Perform cell mapping with ABC.
+        Conduct pre-layout static timing analysis using OpenSTA.
+
+  - Floorplanning:
+        Define core area, cell sites, and tracks with init_fp.
+        Place macro input and output ports using ioplacer.
+        Generate power distribution network (pdn).
+
+  - Placement:
+        Execute global placement with RePLace.
+        Perform detailed placement for component legalization using OpenDP.
+
+   - Clock Tree Synthesis (CTS):
+        Synthesize the clock tree with TritonCTS.
+
+  -  Routing:
+        Conduct global routing to generate a guide file for the detailed router with FastRoute.
+        Perform detailed routing using TritonRoute.
+
+  -  GDSII Generation:
+        Stream out the final GDSII layout file from the routed DEF using Magic.
+
+
+# OpenLane:
+OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, CVC, SPEF-Extractor, KLayout and a number of custom scripts for design exploration and optimization. The flow performs all ASIC implementation steps from RTL all the way down to GDSII.
+- https://github.com/The-OpenROAD-Project/OpenLane
+
+# MAGIC:
+
+Magic is a popular open-source VLSI (Very Large Scale Integration) layout tool used in ASIC (Application-Specific Integrated Circuit) design. It is primarily employed for the physical design phase, allowing engineers to create, edit, and analyze the layout of integrated circuits. Here are some key aspects of the Magic tool in ASIC design:
+-  Layout Editing:
+        Magic is an open-source tool used for creating and editing the physical layout of integrated circuits during the ASIC design process.
+
+-  GDSII Support:
+        It supports the GDSII file format, facilitating the import and export of layouts, which is essential for compatibility with other design tools and manufacturing processes.
+
+-  Design Rule Checking (DRC):
+        Magic includes DRC features, allowing designers to check if the layout adheres to specified design rules and constraints, ensuring manufacturability.
+
+-  LVS Checks:
+        The tool supports Layout versus Schematic (LVS) checks, helping verify the consistency between the physical layout and the intended circuit schematic.
+
+  - Open-Source Nature:
+        Magic is open-source, fostering a collaborative community and enabling customization and extension of its functionality.
 
 ## Preparing Design
 
@@ -507,8 +557,9 @@ make mount
 ![Screenshot from 2023-11-14 20-59-02](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/95473c30-143a-43d2-823d-45a113604e8a)
 
 ## SYNTHESIS
+The primary goal of synthesis is to convert the abstract description of a digital circuit into a netlist, which is a list of logic gates and their interconnections.
 
-To synthesize the code run the following command
+To synthesize the code run the following command.
 
 ```
 run_synthesis
@@ -521,11 +572,16 @@ Statistics after synthesis:
 ![Screenshot from 2023-11-14 22-00-52](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/933fbc08-bda7-40cc-aa9c-7c89e43e897b)
 
 # Floorplan:
-commands to run floorplan
+
+Floorplan includes determining the core area where major functional blocks will be placed, setting up cell sites and tracks for routing, and strategically positioning input and output ports for efficient connectivity. The floorplan serves as a blueprint for the physical implementation of the design, taking into account factors like power distribution and signal integrity. Effective floorplanning in ASIC design helps optimize the layout for performance, minimize signal delays, and adhere to design constraints such as area and power specifications. This initial layout plan provides a foundation for subsequent stages in the ASIC design flow, including placement, routing, and ultimately, the generation of the final GDSII layout for fabrication.
+
+
+Commands to run floorplan
 
 ```
 run_floorplan
 ```
+Post the floorplan run, a .def file will have been created within the results/floorplan directory. We may review floorplan files by checking the floorplan.tcl.
 
 
 ![Screenshot from 2023-11-14 21-00-35](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/392fce02-6627-4586-a607-e1155a1db9a0)
@@ -549,12 +605,20 @@ magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /ho
 
 # Placement:
 
+
+
+- Global placement, also known as initial placement or coarse placement, aims to establish a rough placement of logical elements (cells) on the chip's layout canvas. The primary objective of global placement is to get an approximate positioning of cells before fine-tuning them in the detailed placement stage.
+
+- Detailed placement, often referred to as legalization and optimization, is the stage where the rough placement from global placement is refined to meet specific design objectives and constraints more accurately.
+
+
 ```
 run_placement
 ```
 
 ![Screenshot from 2023-11-14 21-00-49](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/f2ef7f6f-5f51-44cb-87d3-b21a16ea815e)
 
+The design can be viewed on magic within results/placement directory:
 
 Magic command
 ```
@@ -565,6 +629,9 @@ magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /ho
 ![Screenshot from 2023-11-14 21-20-00](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/14bebe61-2605-4440-8be2-9a75f587e723)
 
 # CTS:
+
+Clock tree synteshsis is used to create the clock distribution network that is used to deliver the clock to all sequential elements. The main goal is to create a network with minimal skew across the chip. H-trees are a common network topology that is used to achieve this goal.
+As a result, CTS is used to balance the skew and reduce insertion latency. Before Clock Tree Synthesis, all clock pins were driven by a single clock source. Clock tree synthesis includes both clock tree construction and clock tree balance.Clock tree inverters may be used to create a clock tree that maintains the correct transition (duty cycle), and clock tree buffers (CTB) can balance the clock tree to fulfill the skew and latency requirements.
 
 ```
 run_cts
@@ -588,7 +655,15 @@ run_cts
 ![Screenshot from 2023-11-14 21-44-19](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/87a95023-a61a-4d39-af60-e7f1c829cbca)
 
 # ROUTING:
+Routing refers to the process of determining and establishing the physical paths that connect various components and interconnects within the chip. This step follows the placement phase in the design flow. During routing, the goal is to create a network of wires or metal traces to establish connections between different functional blocks, such as logic gates, memory cells, and other elements.
 
+There are typically two main types of routing:
+
+- Global Routing:
+        In this phase, high-level connections between major blocks or regions of the chip are established. Global routing defines the overall paths and general connectivity.
+
+- Detailed Routing:
+        Once the global routes are established, detailed routing is performed to finalize the specific paths of the connections, considering the available resources, signal timing, and avoiding any design rule violations.
 ```
 run_routing
 ```
@@ -599,6 +674,7 @@ magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /ho
 
 ```
 
+## Layout after routing:
 
 ![Screenshot from 2023-11-14 21-21-31](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/82e2c61b-e2ff-4201-b758-94b0b91ff64f)
 
@@ -610,20 +686,21 @@ magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /ho
 
 ![Screenshot from 2023-11-14 21-24-09](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/c68de762-2dc7-4b26-a333-7bcf26460fa1)
 
-post_routing Timing Reports:\
+## Post_routing Timing Reports:
+
 ![Screenshot from 2023-11-14 22-32-23](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/08a523b3-f46e-4020-bc12-f1bf8887d35f)
 
 
-post_routing Area Reports
+## Post_routing Area Reports
 
 ![Screenshot from 2023-11-14 22-32-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/a766719c-512f-48fa-84b2-6ba122e249ef)
 
-post_routing Power Reports
+## Post_routing Power Reports
 
 ![Screenshot from 2023-11-14 22-33-08](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/8ca440db-674a-4be5-93da-0b603478ef11)
 
 
-Here drc violation is zero:
+## Here drc violation is zero:
 
 ![Screenshot from 2023-11-14 22-27-33](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/d04fdeab-7455-4d3c-b456-e9b2b96c4b10)
 
