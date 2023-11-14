@@ -489,6 +489,161 @@ gtkwave waveform.vcd &
 ![Screenshot from 2023-10-31 18-15-07](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/da045c49-9c52-4ddb-97a3-c95c391f8897)
 
 
+
+
+## Preparing Design
+
+First we make a separate folder of our design in the Openlane folder and include all the neccessary files in the folder named src and also add confic.jason files and make the changes accourding to our code.
+now in terminal go to the Openlane directory and run following code. 
+
+```
+make mount
+%./flow.tcl -interactive
+% package require openlane 0.9
+% prep -design project -verbose 99
+
+
+```
+![Screenshot from 2023-11-14 20-59-02](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/95473c30-143a-43d2-823d-45a113604e8a)
+
+## SYNTHESIS
+
+To synthesize the code run the following command
+
+```
+run_synthesis
+```
+![Screenshot from 2023-11-14 21-00-02](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/6f5aec04-8580-4571-81ab-3177627de148)
+
+Statistics after synthesis:
+
+
+![Screenshot from 2023-11-14 22-00-52](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/933fbc08-bda7-40cc-aa9c-7c89e43e897b)
+
+# Floorplan:
+commands to run floorplan
+
+```
+run_floorplan
+```
+
+
+![Screenshot from 2023-11-14 21-00-35](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/392fce02-6627-4586-a607-e1155a1db9a0)
+
+
+Commands to invoke magic
+
+```
+magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/tmp/merged.nom.lef def read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/results/floorplan/wrapper.def &
+
+```
+
+![Screenshot from 2023-11-14 21-16-53](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/0333fc24-8001-48fd-8b62-a93b6de363dd)
+
+## Die area (Post floorplan)
+![Screenshot from 2023-11-14 22-07-19](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/271d931f-99aa-451b-bfc5-b5ef1f2f8ee0)
+
+## Core area (post floorplan)
+
+![Screenshot from 2023-11-14 22-07-37](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/d4a54967-6486-4c75-84b4-883ada3ed3f0)
+
+# Placement:
+
+```
+run_placement
+```
+
+![Screenshot from 2023-11-14 21-00-49](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/f2ef7f6f-5f51-44cb-87d3-b21a16ea815e)
+
+
+Magic command
+```
+magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/tmp/merged.nom.lef def read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/results/placement/wrapper.def &
+
+```
+
+![Screenshot from 2023-11-14 21-20-00](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/14bebe61-2605-4440-8be2-9a75f587e723)
+
+# CTS:
+
+```
+run_cts
+```
+![Screenshot from 2023-11-14 21-00-58](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/523b3d2e-c9dd-4fdf-b3df-0dbd7a5ef0f4)
+
+## Timing report:
+
+![Screenshot from 2023-11-14 21-38-25](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/6323988b-3719-42bd-a55c-8e884766f52e)
+
+## Area report:
+
+![Screenshot from 2023-11-14 21-39-05](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/3c06d1c6-7563-43e6-8339-3592688cecf3)
+
+## Skew report:
+
+![Screenshot from 2023-11-14 21-39-46](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/9780d6b4-bc1e-4243-9146-be128516f270)
+
+## Power report:
+
+![Screenshot from 2023-11-14 21-44-19](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/87a95023-a61a-4d39-af60-e7f1c829cbca)
+
+# ROUTING:
+
+```
+run_routing
+```
+![Screenshot from 2023-11-14 21-01-26](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/61f158ae-bd61-4b07-accc-93f3a6d22d5b)
+
+```
+magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/tmp/merged.nom.lef def read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/results/routing/wrapper.def &
+
+```
+
+
+![Screenshot from 2023-11-14 21-21-31](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/82e2c61b-e2ff-4201-b758-94b0b91ff64f)
+
+
+![Screenshot from 2023-11-14 21-22-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/83f6a0ce-b32e-406d-bd5e-09e29be29961)
+
+## Area of design:
+
+
+![Screenshot from 2023-11-14 21-24-09](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/c68de762-2dc7-4b26-a333-7bcf26460fa1)
+
+post_routing Timing Reports:\
+![Screenshot from 2023-11-14 22-32-23](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/08a523b3-f46e-4020-bc12-f1bf8887d35f)
+
+
+post_routing Area Reports
+
+![Screenshot from 2023-11-14 22-32-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/a766719c-512f-48fa-84b2-6ba122e249ef)
+
+post_routing Power Reports
+
+![Screenshot from 2023-11-14 22-33-08](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/8ca440db-674a-4be5-93da-0b603478ef11)
+
+
+Here drc violation is zero:
+
+![Screenshot from 2023-11-14 22-27-33](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/d04fdeab-7455-4d3c-b456-e9b2b96c4b10)
+
+
+
+# Performance Calculation:
+
+Given a Clock period of 60ns in Json file , setup slack we got after routing is 16.03ns
+```
+                              1
+Max Performance =  ------------------------
+                     clock period - slack(setup)
+
+```
+```
+Max Performance = 0.022772 Ghz
+
+```
+
+
 ## ACKNOWLEDMENT
 
 - Kunal Ghosh, VSD Corp. Pvt. Ltd.
