@@ -643,6 +643,32 @@ Max Performance = 0.022772 Ghz
 
 ```
 
+# EXTRAS:
+
+
+![Screenshot from 2023-11-14 22-41-05](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/50d49d52-cddc-49f0-988d-004977ab18fd)
+
+# OpenLane Interactive Flow:
+
+```
+cd Desktop/OpenLane/ 
+
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+run_synthesis
+run_floorplan
+run_placement
+run_cts
+gen_pdn
+run_routing
+run_magic
+run_magic_spice_export
+run_magic_drc
+run_antenna_check
+
+
+```
 
 ## ACKNOWLEDMENT
 
@@ -654,5 +680,7 @@ Max Performance = 0.022772 Ghz
 ## REFERENCES
 
 - https://github.com/SakethGajawada/RISCV-GNU
+- https://github.com/The-OpenROAD-Project/OpenLane
+  
 - https://www.electronicshub.org/arduino-flame-sensor-interface/
 - https://www.moryarduino.com/arduino-project/fire-alarm-using-flame-sensor-arduino
