@@ -640,19 +640,26 @@ run_cts
 
 ## Timing report:
 
-![Screenshot from 2023-11-14 21-38-25](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/6323988b-3719-42bd-a55c-8e884766f52e)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/4924b63b-dc2d-4eaf-b3cb-0757ac535c34)
+
+
+
 
 ## Area report:
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/0432c0fb-57d1-4e68-8595-c0f2de36b496)
 
-![Screenshot from 2023-11-14 21-39-05](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/3c06d1c6-7563-43e6-8339-3592688cecf3)
+
 
 ## Skew report:
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/e564f49e-43b3-4a9f-9a60-469b6a00d5d3)
 
-![Screenshot from 2023-11-14 21-39-46](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/9780d6b4-bc1e-4243-9146-be128516f270)
+
 
 ## Power report:
 
-![Screenshot from 2023-11-14 21-44-19](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/87a95023-a61a-4d39-af60-e7f1c829cbca)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/20b3fc07-3119-41b4-8bc2-db8e74337d68)
+
+
 
 # ROUTING:
 Routing refers to the process of determining and establishing the physical paths that connect various components and interconnects within the chip. This step follows the placement phase in the design flow. During routing, the goal is to create a network of wires or metal traces to establish connections between different functional blocks, such as logic gates, memory cells, and other elements.
@@ -667,7 +674,7 @@ There are typically two main types of routing:
 ```
 run_routing
 ```
-![Screenshot from 2023-11-14 21-01-26](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/61f158ae-bd61-4b07-accc-93f3a6d22d5b)
+![Screenshot from 2023-11-30 00-04-18](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/0746e113-450e-4a73-8197-d72d98b45548)
 
 ```
 magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/tmp/merged.nom.lef def read /home/shivangi/OpenLane/designs/processor_designs/runs/RUN_2023.11.14_14.01.41/results/routing/wrapper.def &
@@ -688,27 +695,32 @@ magic -T /home/shivangi/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read /ho
 
 ## Post_routing Timing Reports:
 
-![Screenshot from 2023-11-14 22-32-23](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/08a523b3-f46e-4020-bc12-f1bf8887d35f)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/5238b8c1-a265-4213-a107-5986d4f0a69d)
+
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/2ab0c88a-a669-45a9-bd8c-fe0f3e6d3b6f)
+
 
 
 ## Post_routing Area Reports
 
-![Screenshot from 2023-11-14 22-32-50](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/a766719c-512f-48fa-84b2-6ba122e249ef)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/40896907-9c39-46ec-8b74-cc9fa91ef2c9)
+
+
 
 ## Post_routing Power Reports
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/a6b618fe-0400-49b1-832a-7d7feb3a2eca)
 
-![Screenshot from 2023-11-14 22-33-08](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/8ca440db-674a-4be5-93da-0b603478ef11)
 
 
 ## Here drc violation is zero:
 
-![Screenshot from 2023-11-14 22-27-33](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/d04fdeab-7455-4d3c-b456-e9b2b96c4b10)
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/eb27cd44-ddab-4de3-ad84-2606fa9d0dc5)
 
 
 
 # Performance Calculation:
 
-Given a Clock period of 60ns in Json file , setup slack we got after routing is 16.03ns
+Given a Clock period of 40ns in Json file , setup slack we got after routing is 8.87ns
 ```
                               1
 Max Performance =  ------------------------
@@ -716,7 +728,7 @@ Max Performance =  ------------------------
 
 ```
 ```
-Max Performance = 0.022772 Ghz
+Max Performance = 0.0321 Ghz
 
 ```
 
