@@ -735,7 +735,9 @@ Max Performance = 0.0321 Ghz
 # EXTRAS:
 
 
-![Screenshot from 2023-11-14 22-41-05](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/50d49d52-cddc-49f0-988d-004977ab18fd)
+
+![image](https://github.com/Shivangi2207/Fire_detector_RISCV/assets/140998647/f0e2899a-2145-4cec-840b-e90a0fa49883)
+
 
 # OpenLane Interactive Flow:
 
